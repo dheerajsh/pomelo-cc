@@ -1,0 +1,33 @@
+version: '3.4'
+services:
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+  articlesService:
+    image: articles-service:dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev-build
+    environment: []
+    volumes:
+      - ./:/app/
+    entrypoint: ['npm', 'run', 'start:dev']
+    env_file:
+      - .env
+      # To use DB running with docker compose.
+    environment:
+      - DB_HOST=mongo
+      - DB_PORT=27017
+      - DB_NAME=articles
+      - DB_USER=
+      - DB_PASS=
+    ports:
+      - "4000:4000"
+      - "4001:4001"
+volumes:
+  mongodb:
+
