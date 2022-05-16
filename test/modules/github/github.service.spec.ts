@@ -22,6 +22,7 @@ describe('FormatService', () => {
       providers: [GithubService, {
         provide: ConfigService,
         useValue: {
+          // mocking get server config
           get: jest.fn((key: string) => {
             if (key === 'server') {
               return {githubSearchUrl: 'http://dummygithuburl.com'}
@@ -71,6 +72,7 @@ describe('FormatService', () => {
           total_count: 200,
         },
       }
+      // mocked github search api to return success result
       mockedAxios.get.mockResolvedValueOnce(searchResults)
       const result = await service.gitSearch(gitSearchDto)
 
@@ -94,10 +96,12 @@ describe('FormatService', () => {
           },
         },
       }
+      // mocked github search api to fail
       mockedAxios.get.mockRejectedValueOnce(errorResponse)
       try {
         await service.gitSearch(gitSearchDto)
       } catch (error) {
+        expect(axios.get).toHaveBeenCalledWith(`http://dummygithuburl.com?q=${gitSearchDto.q}&page=${gitSearchDto.page}&per_page=${gitSearchDto.per_page}`)
         expect(error.status).toBe(422)
         expect(error.message).toBe('Unproceble entity, query not supported')
       }
