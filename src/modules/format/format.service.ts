@@ -5,14 +5,15 @@ import { deserialize, serialize } from 'class-transformer'
 import { Logger } from 'winston'
 import { FormatOutputItem } from './format.output.dto'
 import { FormatInputItem } from './format.input.dto'
+import { ConfigService } from '@nestjs/config'
 
 @Injectable()
 export class FormatService {
 
   private readonly logger: Logger
   constructor(
-    private readonly loggerService: LoggerService) {
-
+    private readonly loggerService: LoggerService,
+    private readonly configService: ConfigService) {
     this.logger = this.loggerService.getLogger(FormatService.name)
   }
 

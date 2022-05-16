@@ -1,6 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import { LoggerModule } from '@logger/logger.module'
 import { FormatInputItem } from '@modules/format/format.input.dto'
+import { ConfigModule } from '@nestjs/config'
 import { Test, TestingModule } from '@nestjs/testing'
 import { FormatService } from '../../../src/modules/format/format.service'
 
@@ -12,6 +13,7 @@ describe('FormatService', () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
         LoggerModule,
+        ConfigModule,
       ],
       providers: [FormatService],
     }).compile()
