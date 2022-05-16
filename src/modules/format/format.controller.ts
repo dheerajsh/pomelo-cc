@@ -39,12 +39,12 @@ export class FormatController {
       id: 12, // eslint-disable-line no-magic-numbers
       level: 1,
       parent_id: null,
-      title: 'House',
+      title: 'Door',
     }],
   },
   } })
   @HttpCode(HttpStatus.OK)
-  public async FormatInput(@Body( new ValidationPipe({transform : true})) input: ReadonlyMap<string, readonly FormatInputItem[]>): Promise<readonly FormatOutputItem[]> {
+  public async FormatInput(@Body(new ValidationPipe({transform : true})) input: ReadonlyMap<string, readonly FormatInputItem[]>): Promise<readonly FormatOutputItem[]> {
 
     this.logger.info('request recieved to transform')
 
@@ -57,25 +57,4 @@ export class FormatController {
       })
   }
 
-
-  /**
-     * Find all the articles for the given search params
-     * Accessible only for Admins
-     */
-  // @Get()
-  // @ApiResponse({ description: 'articles found', status: HttpStatus.OK })
-  // @ApiResponse({ description: 'No articles found for matching criteria', status: HttpStatus.NOT_FOUND })
-  // @HttpCode(HttpStatus.OK)
-  // @HttpCode(HttpStatus.NOT_FOUND)
-  // public async findArticles(
-  //   @Query(new ValidationPipe({ transform: true })) filter: ArticlesFilterInput,
-  // ): Promise<readonly [readonly Article[], number]> {
-
-  //   const articles = await this.articlesService.findAll(filter)
-  //   if (!articles) {
-  //     throw new NotFoundException('No articles for found for matching search criteria')
-  //   }
-
-  //   return articles
-  // }
 }

@@ -1,7 +1,7 @@
 {
-  "name": "articles-service",
+  "name": "pomelo-cc",
   "version": "0.0.1",
-  "description": "articles application",
+  "description": "pomelo coding challenge",
   "author": "Dheeraj Sharma",
   "private": true,
   "license": "UNLICENSED",

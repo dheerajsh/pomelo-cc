@@ -99,6 +99,7 @@ You'll need to write an algorithm in JavaScript in your [HapiJS](https://hapi.de
 #### Instructions
 
 Use the [GitHub Search API](https://docs.github.com/en/free-pro-team@latest/rest/guides/traversing-with-pagination) with pagination to find all the repositories that match the query `nodejs`. Display results 10 by 10 in a view in the [HapiJS](https://hapi.dev/) application you built in Step 1. Results should be displayed in a table (it doesn't have to look good) and, the pagination should be fully functional on the front-end side.
+Note: this repo contains only API's for search the frontend part is developed in a separate repo [pomelo-cc-frontend](https://github.com/dheerajsh/pomelo-cc-frontend)
 
 ### Guidelines
 

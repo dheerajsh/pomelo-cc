@@ -10,11 +10,10 @@ import { ConfigService } from '@nestjs/config'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { IServerConfig } from '@config/server.config'
 import { LoggerService } from '@logger/logger.service'
-import { ValidationPipe } from '@nestjs/common'
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule, {cors: true})
-  app.useGlobalPipes(new ValidationPipe({transform: true}))
+
   const options = new DocumentBuilder()
     .setTitle('Pomelo coding challange')
     .setDescription('The Service serves the api for pomelo coding challenge')
