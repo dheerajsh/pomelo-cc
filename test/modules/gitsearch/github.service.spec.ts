@@ -1,7 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import { LoggerModule } from '@logger/logger.module'
-import { GithubSearchDto } from '@modules/github/github.search.dto'
-import { GithubService } from '@modules/github/github.service'
+import { GithubSearchDto } from '@modules/gitsearch/gitsearch.search.dto'
+import { GitsearchService } from '@modules/gitsearch/gitsearch.service'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { Test, TestingModule } from '@nestjs/testing'
 import axios from 'axios'
@@ -11,7 +11,7 @@ const mockedAxios = axios as jest.Mocked<typeof axios>
 
 describe('FormatService', () => {
   // eslint-disable-next-line functional/no-let
-  let service: GithubService
+  let service: GitsearchService
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -19,7 +19,7 @@ describe('FormatService', () => {
         LoggerModule,
         ConfigModule,
       ],
-      providers: [GithubService, {
+      providers: [GitsearchService, {
         provide: ConfigService,
         useValue: {
           // mocking get server config
@@ -34,7 +34,7 @@ describe('FormatService', () => {
       }],
     }).compile()
 
-    service = module.get<GithubService>(GithubService)
+    service = module.get<GitsearchService>(GitsearchService)
   })
 
   it('should be defined', () => {

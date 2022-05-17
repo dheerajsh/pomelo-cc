@@ -10,6 +10,9 @@ export default registerAs<ConfigFactory<IServerConfig>>('server', () => {
   }
 })
 
+/**
+ * server related configs
+ */
 export interface IServerConfig {
   readonly port: number
   readonly logLevel: string
