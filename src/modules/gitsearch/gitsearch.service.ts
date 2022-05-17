@@ -6,12 +6,12 @@ import { ConfigService } from '@nestjs/config'
 import axios from 'axios'
 import { plainToClass } from 'class-transformer'
 import { Logger } from 'winston'
-import { GithubSearchDto } from './github.search.dto'
-import { GithubSearchErrorDto } from './github.search.error.dto'
-import { GithubSearchResultDto, SearchResultItems } from './github.search.result.dto'
+import { GithubSearchDto } from './gitsearch.search.dto'
+import { GithubSearchErrorDto } from './gitsearch.search.error.dto'
+import { GithubSearchResultDto, SearchResultItems } from './gitsearch.search.result.dto'
 
 @Injectable()
-export class GithubService {
+export class GitsearchService {
 
   private readonly logger: Logger
   private readonly serverConfig: IServerConfig
@@ -19,7 +19,7 @@ export class GithubService {
     private readonly loggerService: LoggerService,
     private readonly configService: ConfigService) {
 
-    this.logger = this.loggerService.getLogger(GithubService.name)
+    this.logger = this.loggerService.getLogger(GitsearchService.name)
     this.serverConfig = configService.get<IServerConfig>('server')
   }
 
@@ -54,15 +54,17 @@ export class GithubService {
       return result
     } catch (error) {
       const status = error.response.status
-      this.logger.error(`Error with search request query=${searchDto.q}, page=${searchDto.page} status=${status}`)
-      const errors = error.response.data.errors
+      this.logger.error(`Error with search request query=${searchDto.q}, page=${searchDto.page} status=${status}`, error)
 
-      const searchError = plainToClass(GithubSearchErrorDto, {
-        status,
-        message: errors[0].message,
-      })
+      if(error.response) {
 
-      throw searchError
+        const errors = error.response.data.errors
+        const searchError = plainToClass(GithubSearchErrorDto, {
+          status,
+          message: errors[0].message,
+        })
+        throw searchError
+      }
     }
   }
 }

@@ -1,24 +1,24 @@
 import { LoggerModule } from '@logger/logger.module'
-import { GithubController } from '@modules/github/github.controller'
-import { GithubService } from '@modules/github/github.service'
+import { GitsearchController } from '@modules/gitsearch/gitsearch.controller'
+import { GitsearchService } from '@modules/gitsearch/gitsearch.service'
 import { ConfigModule } from '@nestjs/config'
 import { Test, TestingModule } from '@nestjs/testing'
 
 describe('GithubController', () => {
   // eslint-disable-next-line functional/no-let
-  let controller: GithubController
+  let controller: GitsearchController
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [GithubController],
+      controllers: [GitsearchController],
       imports: [
         LoggerModule,
         ConfigModule,
       ],
-      providers: [GithubService],
+      providers: [GitsearchService],
     }).compile()
 
-    controller = module.get<GithubController>(GithubController)
+    controller = module.get<GitsearchController>(GitsearchController)
   })
 
   it('should be defined', () => {

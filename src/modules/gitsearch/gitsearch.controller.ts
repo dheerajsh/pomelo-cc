@@ -3,19 +3,19 @@ import { LoggerService } from '@logger/logger.service'
 import { Controller, Get, HttpCode, HttpException, HttpStatus, Query, ValidationPipe } from '@nestjs/common'
 import { ApiResponse, ApiTags } from '@nestjs/swagger'
 import { Logger } from 'winston'
-import { GithubSearchDto } from './github.search.dto'
-import { GithubSearchErrorDto } from './github.search.error.dto'
-import { GithubSearchResultDto } from './github.search.result.dto'
-import { GithubService } from './github.service'
+import { GithubSearchDto } from './gitsearch.search.dto'
+import { GithubSearchErrorDto } from './gitsearch.search.error.dto'
+import { GithubSearchResultDto } from './gitsearch.search.result.dto'
+import { GitsearchService } from './gitsearch.service'
 
 @ApiTags('Github search Api\'s')
-@Controller('github')
-export class GithubController {
+@Controller('git')
+export class GitsearchController {
 
   private readonly logger: Logger
   constructor(private readonly loggerService: LoggerService,
-              private readonly githubService: GithubService) {
-    this.logger = this.loggerService.getLogger(GithubController.name)
+              private readonly githubService: GitsearchService) {
+    this.logger = this.loggerService.getLogger(GitsearchController.name)
   }
 
 
