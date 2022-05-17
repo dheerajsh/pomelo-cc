@@ -6,6 +6,7 @@ import { Logger } from 'winston'
 import { FormatOutputItem } from './format.output.dto'
 import { FormatInputItem } from './format.input.dto'
 import { FormatService } from './format.service'
+import { FormatInputValidationPipe } from './format.input.validation.pipe'
 
 
 @ApiTags('Format Api\'s')
@@ -44,7 +45,7 @@ export class FormatController {
   },
   } })
   @HttpCode(HttpStatus.OK)
-  public async FormatInput(@Body(new ValidationPipe({transform : true})) input: ReadonlyMap<string, readonly FormatInputItem[]>): Promise<readonly FormatOutputItem[]> {
+  public async FormatInput(@Body(new FormatInputValidationPipe()) input: ReadonlyMap<string, readonly FormatInputItem[]>): Promise<readonly FormatOutputItem[]> {
 
     this.logger.info('request recieved to transform')
 

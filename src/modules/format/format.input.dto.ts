@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { Type } from 'class-transformer'
-import { IsDefined, IsNumber, IsOptional, ValidateIf, ValidateNested } from 'class-validator'
+import { ArrayMaxSize, arrayMaxSize, IsArray, IsDefined, IsEmpty, IsNumber, IsOptional, ValidateIf, ValidateNested } from 'class-validator'
 
 export class FormatInputItem {
 
@@ -17,7 +17,7 @@ export class FormatInputItem {
 
   @ApiProperty({
     description: 'Title of the item i.e house, window etc',
-    required: false,
+    required: true,
     type: Number,
   })
   @IsDefined()
@@ -49,27 +49,8 @@ export class FormatInputItem {
   readonly parent_id: number | null
 
   @IsOptional()
+  @ArrayMaxSize(0)
   readonly children: readonly void[]
 }
 
-export class FormatInputDto {
-
-  @ValidateNested( {
-    each: true,
-  })
-  readonly 0: readonly FormatInputItem[]
-
-  @ValidateNested( {
-    each: true,
-  })
-  @IsOptional()
-  readonly 1: readonly FormatInputItem[]
-
-  @ValidateNested( {
-    each: true,
-  })
-  @IsOptional()
-  // eslint-disable-next-line no-magic-numbers
-  readonly 2: readonly FormatInputItem[]
-}
 
